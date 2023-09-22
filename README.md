@@ -13,6 +13,8 @@ Do you want to run the app virtualized with docker?
 * Yes: Then you will need [Docker Compose](https://docs.docker.com/compose/install/).
 * No: Please have [Leiningen](https://leiningen.org/#install) installed as build tool.
 
+* https://github.com/clj-holmes/clj-holmes ---------using clj for vulnarability scanning
+
 ## Setup
 
 The app needs a postgres database. You can create a database with correct
