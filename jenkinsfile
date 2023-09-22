@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    tools{
+        jdk 'jdk17'
+    }
+//tools name is coming from configured in tools section
+// defining scanner tool to use it in pipeline
+    environment{
+
+        SCANNER_HOME= tool 'sonar-scanner'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git url:"https://github.com/A-hash-bit/Webshop-app.git", branch:"master"
+            }
+        }
+        //using clj-homes for scanning 
+        stage('Scan-project') {
+            steps {
+                sh "clj-holmes fetch-rules"
+                sh "clj-holmes scan -p ./"
+            }
+        }
+         stage('Sonarqube') {
+            steps {
+        //use "sonarserver" as its already configures in system section
+               withSonarQubeEnv('sonarserver'){
+        //$SCANNER_HOME/bin/sonar-scanner - path of scanner executable
+                sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=webshop \
+                      -Dsonar.projectName=webshop '''
+               }
+            }
+        }
+
+        //building dockerfile and deploy via docker compose
+        stage('build and') {
+            steps {
+              sh "docker-compose up -d"
+            }
+        }
+
+    }
+    }
+    
