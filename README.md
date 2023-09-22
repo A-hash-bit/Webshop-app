@@ -14,7 +14,8 @@ Do you want to run the app virtualized with docker?
 * Yes: Then you will need [Docker Compose](https://docs.docker.com/compose/install/).
 * No: Please have [Leiningen](https://leiningen.org/#install) installed as build tool.
 
-* https://github.com/clj-holmes/clj-holmes ---------using clj for vulnarability scanning
+* https://github.com/clj-holmes/clj-holmes ---------using clj for vulnarability scanning.
+  Install it on jenkins server(master/slave)
 
 ## Setup
 
